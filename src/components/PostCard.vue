@@ -6,7 +6,9 @@
         <h3 class="">{{ post.creator?.name }}</h3>
 
         <p>{{ post.body }}</p>
-        <p>{{ post.createdAt }}</p>
+        <!-- Look at inspire for date formats -->
+        <p>{{ new Date(post.createdAt).toLocaleDateString() }}</p>
+        <!-- Add in like count, reference Art Terminal -->
         <p>{{}}</p>
 
 

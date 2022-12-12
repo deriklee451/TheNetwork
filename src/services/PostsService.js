@@ -24,6 +24,7 @@ class PostsService {
         const res = await api.get(url)
         console.log('change page', res.data);
         AppState.posts = res.data.posts
+        AppState.profilePosts = res.data.posts
         AppState.nextPage = res.data.older
         AppState.previousPage = res.data.newer
     }
@@ -36,6 +37,11 @@ class PostsService {
         AppState.previousPage = res.data.newer
 
 
+    }
+
+    async getProfile(profileId) {
+        const res = await api.get(`api/profiles/${profileId}`)
+        AppState.activeProfile = res.data
     }
 
 

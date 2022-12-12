@@ -5,10 +5,10 @@
                 <img :src="profile.picture" alt="" class="img-fluid profile-picture rounded-circle elevation-5">
                 <div class="bg-transparent rounded elevation-5 p-5">
                     <h1 class="elevation-1">
-                        {{ post.name }}
+                        {{ profile.name }}
                     </h1>
                     <h2>
-                        {{ post.bio }}
+                        {{ profile.bio }}
                     </h2>
                 </div>
             </div>
@@ -43,6 +43,7 @@ import { computed, onMounted } from 'vue';
 import PostCard from '../components/PostCard.vue';
 import { postsService } from '../services/PostsService';
 import { useRoute } from 'vue-router';
+import { logger } from '../utils/Logger.js';
 export default {
 
     setup() {
@@ -55,15 +56,26 @@ export default {
 
             }
         }
+        async function getProfile() {
+            try {
+                await postsService.getProfile(route.params.id)
+            } catch (error) {
+                logger.log(error)
+            }
+        }
         onMounted(() => {
+            // Get Profile by Id 
             getProfilePost();
+            getProfile();
         })
 
         return {
+            // NOTE pay attention to where you are drawing posts for the change page 
             posts: computed(() => AppState.profilePosts),
             profile: computed(() => AppState.activeProfile),
             nextPage: computed(() => AppState.nextPage),
             previousPage: computed(() => AppState.previousPage),
+
 
             async changePage(url) {
                 try {
