@@ -1,14 +1,21 @@
 <template>
-  <div class="about">
-    <h1>This is the about page</h1>
-  </div>
+
 </template>
 
 <script>
 export default {
   setup() {
     return {
-
+      editable,
+      account: computed(() => AppState.account),
+      async editAccount() {
+        try {
+          await accountService.editAccount(editable.value)
+        } catch (error) {
+          logger.error(error)
+          Pop.error(error.message)
+        }
+      }
     }
   }
 }
