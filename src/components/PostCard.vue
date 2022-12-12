@@ -6,6 +6,8 @@
         <h3 class="">{{ post.creator?.name }}</h3>
 
         <p>{{ post.body }}</p>
+        <p>{{ post.createdAt }}</p>
+        <p>{{}}</p>
 
 
     </div>

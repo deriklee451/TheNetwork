@@ -5,20 +5,35 @@
                 <img :src="profile.picture" alt="" class="img-fluid profile-picture rounded-circle elevation-5">
                 <div class="bg-transparent rounded elevation-5 p-5">
                     <h1 class="elevation-1">
-                        {{ profile.name }}
+                        {{ post.name }}
                     </h1>
                     <h2>
-                        {{ profile.bio }}
+                        {{ post.bio }}
                     </h2>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div v-for="p in posts" class="col-md-4 col-12 p-4">
+            <div v-for="p in posts" class="col-md-8 col-12 card p-4">
                 <PostCard :post="p" />
             </div>
         </div>
     </div>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-end">
+                <button :disabled="!previousPage" @click="changePage(previousPage)" class="btn btn-outline-dark w-40">
+                    Previous
+                </button>
+            </div>
+
+            <div class="col-md-6 ">
+                <button :disabled="!nextPage" @click="changePage(nextPage)" class="btn btn-outline-dark w-40">
+                    Next
+                </button>
+            </div>
+        </div>
+    </section>
 </template>
 
 
@@ -46,11 +61,23 @@ export default {
 
         return {
             posts: computed(() => AppState.profilePosts),
-            profile: computed(() => AppState.activeProfile)
+            profile: computed(() => AppState.activeProfile),
+            nextPage: computed(() => AppState.nextPage),
+            previousPage: computed(() => AppState.previousPage),
+
+            async changePage(url) {
+                try {
+                    await postsService.changePage(url)
+                } catch (error) {
+                    logger.log(error)
+                    Pop.error(error)
+                }
+            }
         };
     },
-    components: { PostCard }
-}
+};
+components: { PostCard }
+
 
 </script>
 
