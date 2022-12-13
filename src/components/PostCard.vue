@@ -9,7 +9,9 @@
         <!-- Look at inspire for date formats -->
         <p>{{ new Date(post.createdAt).toLocaleDateString() }}</p>
         <!-- Add in like count, reference Art Terminal -->
-        <p>{{}}</p>
+        <p class="mdi mdi-thumb-up selectable fs-3" @click="like()">{{ post.likes.length }}</p>
+        <button v-if="(post.creatorId == account.id)" @click="removePost(post.id)"
+            class="btn btn-danger delete-btn rounded-pill"><i class="  px-2 mdi mdi-delete-forever"></i></button>
 
 
     </div>
@@ -23,13 +25,24 @@
 import { postsService } from '../services/PostsService.js';
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { logger } from '../utils/Logger.js';
 export default {
     props: { post: { type: Object, required: true } },
     setup(props) {
         const router = useRouter()
         return {
+            posts: computed(() => AppState.posts),
+            account: computed(() => AppState.account),
+            async removePost() {
+
+                try {
+                    await postsService.removePost(props.post.id)
+                } catch (error) {
+                    Pop.error(error)
+                    logger.error(error)
+                }
+            },
             async getPostById() {
                 try {
                     this.goTo()
@@ -41,6 +54,15 @@ export default {
             goTo() {
                 logger.log('pushing')
                 router.push({ name: 'Profile', params: { id: props.post.creatorId } })
+            },
+
+            async like() {
+
+                try {
+                    await postsService.like(id)
+                } catch (error) {
+                    logger.log(error)
+                }
             }
         }
     }

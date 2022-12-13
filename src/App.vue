@@ -6,8 +6,25 @@
 
   <main>
 
-    <router-view />
     <!-- Throw some ads here  -->
+    <div class="row justify-content-center">
+      <div class="col-7">
+        <img class="img-fluid" src="https://codeworks.blob.core.windows.net/public/assets/ads/BannerAdTaskMaster.png"
+          alt="">
+      </div>
+
+    </div>
+    <router-view />
+    <div class="row justify-content-center">
+      <div class="col-9">
+        <img class="img-fluid" src="https://codeworks.blob.core.windows.net/public/assets/ads/BannerAdMusicisfun.png"
+          alt="">
+      </div>
+
+    </div>
+
+
+
 
   </main>
   <footer class="bg-dark text-light">
@@ -22,8 +39,17 @@ import Navbar from './components/Navbar.vue'
 
 export default {
   setup() {
+
+    // async function getAds() {
+    //   try {
+    //     await posts.getAds();
+    //   }
+    //   catch (error) {
+    //   }
+    // }
     return {
-      appState: computed(() => AppState)
+      // ads: computed(() => appState.ads),
+      // appState: computed(() => AppState)
     }
   },
   components: { Navbar }

@@ -13,10 +13,21 @@ class PostsService {
         AppState.previousPage = res.data.newer
     }
 
+    async getAds() {
+        const res = await api.get('api/ads')
+        appState.ads = res.data.ads
+    }
+
     async createPost(postData) {
         const res = await api.post('api/posts', postData)
         logger.log(res.data)
         AppState.posts.unshift(res.data)
+    }
+
+    async like() {
+        const res = await api.post(`api/posts/${id}/like`)
+        const like = appState.posts.find(l => l.id == id)
+        appState.posts = likes.length++
     }
 
 
@@ -42,6 +53,16 @@ class PostsService {
     async getProfile(profileId) {
         const res = await api.get(`api/profiles/${profileId}`)
         AppState.activeProfile = res.data
+    }
+
+    async removePost(id) {
+
+        const res = await api.delete('api/posts/' + id)
+
+        let index = AppState.posts.findIndex(p => p.id == id)
+        if (index >= 0) {
+            AppState.splice(index, 1)
+        }
     }
 
 
