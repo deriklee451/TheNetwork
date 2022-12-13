@@ -3,9 +3,16 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
 
-        <h3>The Network</h3>
+        <h3>The Network <i class="mdi mdi-human-scooter"></i></h3>
+
       </div>
     </router-link>
+
+
+
+
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,11 +21,12 @@
       <ul class="navbar-nav me-auto">
         <li>
           <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
+            Search
           </router-link>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
+
       <Login />
     </div>
   </nav>

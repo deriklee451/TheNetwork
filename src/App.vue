@@ -1,13 +1,17 @@
 <template>
   <header>
     <Navbar />
+
   </header>
+
   <main>
+
     <router-view />
     <!-- Throw some ads here  -->
+
   </main>
   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+
   </footer>
 </template>
 

@@ -3,18 +3,28 @@
         <div v-if="profile" class="row cover-img" :style="`background-image: url(${profile.coverImg})`">
             <div class="col-12 d-flex align-items-center justify-content-around">
                 <img :src="profile.picture" alt="" class="img-fluid profile-picture rounded-circle elevation-5">
-                <div class="bg-transparent rounded elevation-5 p-5">
+                <div class="opacity-75 rounded card elevation-5 p-5">
                     <h1 class="elevation-1">
                         {{ profile.name }}
                     </h1>
                     <h2>
                         {{ profile.bio }}
                     </h2>
+                    <p class="mdi mdi-github fs-5">{{ profile.github }}</p>
+                    <p class="mdi mdi-linkedin fs-5">{{ profile.linkedin }}</p>
+                    <p class="mdi mdi-page fs-5">Resume:{{ profile.resume }}</p>
+                    <p>Class:{{ profile.class }}</p>
+                    <p class="">Graduated {{ profile.graduated }}</p>
+
+
+
+
                 </div>
+
             </div>
         </div>
-        <div class="row">
-            <div v-for="p in posts" class="col-md-8 col-12 card p-4">
+        <div class="row justify-content-center">
+            <div v-for="p in posts" class="col-md-8 col-12 card justify-content-center p-4">
                 <PostCard :post="p" />
             </div>
         </div>
